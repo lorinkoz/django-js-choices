@@ -8,6 +8,7 @@ from django.template import loader
 from django.utils.encoding import force_text
 
 from . import js_choices_settings as default_settings
+from . import rjsmin
 
 
 def prepare_choices(choices):
@@ -45,10 +46,13 @@ def generate_js():
                         named_choices[name] = index
     js_var_name = getattr(settings, 'JS_CHOICES_JS_VAR_NAME', default_settings.JS_VAR_NAME)
     js_global_object_name = getattr(settings, 'JS_CHOICES_JS_GLOBAL_OBJECT_NAME', default_settings.JS_GLOBAL_OBJECT_NAME)
+    minfiy = getattr(settings, 'JS_CHOICES_JS_MINIFY', default_settings.JS_MINIFY)
     js_content = loader.render_to_string('django_js_choices/choices_js.tpl', {
         'raw_choices_list': raw_choices,
         'named_choices': json.dumps(named_choices),
         'js_var_name': js_var_name,
         'js_global_object_name': js_global_object_name,
     })
+    if minfiy:
+        js_content = rjsmin.jsmin(js_content)
     return js_content
