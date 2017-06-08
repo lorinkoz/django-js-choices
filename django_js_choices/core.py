@@ -6,6 +6,7 @@ from django.apps import apps
 from django.conf import settings
 from django.template import loader
 from django.utils.encoding import force_text
+from django.utils.translation import activate, deactivate
 
 from . import js_choices_settings as default_settings
 from . import rjsmin
@@ -24,9 +25,11 @@ def prepare_choices(choices):
     return new_choices
 
 
-def generate_js():
+def generate_js(locale=None):
     raw_choices = []
     named_choices = {}
+    if locale:
+        activate(locale)
     for app_config in apps.get_app_configs():
         for model in app_config.get_models():
             for field in model._meta.get_fields():
@@ -44,6 +47,8 @@ def generate_js():
                         raw_choices.append(value)
                     finally:
                         named_choices[name] = index
+    if locale:
+        deactivate()
     js_var_name = getattr(settings, 'JS_CHOICES_JS_VAR_NAME', default_settings.JS_VAR_NAME)
     js_global_object_name = getattr(settings, 'JS_CHOICES_JS_GLOBAL_OBJECT_NAME', default_settings.JS_GLOBAL_OBJECT_NAME)
     minfiy = getattr(settings, 'JS_CHOICES_JS_MINIFY', default_settings.JS_MINIFY)
