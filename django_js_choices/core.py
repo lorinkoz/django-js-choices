@@ -28,6 +28,7 @@ def prepare_choices(choices):
 def generate_js(locale=None):
     raw_choices = []
     named_choices = {}
+    used_names = []
     if locale:
         activate(locale)
     for app_config in apps.get_app_configs():
@@ -35,18 +36,26 @@ def generate_js(locale=None):
             for field in model._meta.get_fields():
                 choices = getattr(field, 'flatchoices', None)
                 if choices:
-                    name = '{}_{}'.format(
+                    full_name = '{}_{}'.format(
                         model._meta.label_lower.replace('.', '_'),
                         field.name
                     )
-                    value = json.dumps(dict(tuple(prepare_choices(choices))))
+                    simple_name = '{}_{}'.format(model._meta.model_name.lower(), field.name)
+                    name = field.name
+                    value = json.dumps(prepare_choices(choices))
                     try:
                         index = raw_choices.index(value)
                     except ValueError:
                         index = len(raw_choices)
                         raw_choices.append(value)
                     finally:
-                        named_choices[name] = index
+                        named_choices[full_name] = index
+                        if simple_name not in used_names:
+                            named_choices[simple_name] = index
+                            used_names.append(simple_name)
+                        if name not in used_names:
+                            named_choices[name] = index
+                            used_names.append(name)
     if locale:
         deactivate()
     js_var_name = getattr(settings, 'JS_CHOICES_JS_VAR_NAME', default_settings.JS_VAR_NAME)
