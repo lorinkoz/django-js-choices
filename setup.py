@@ -34,8 +34,13 @@ setup(
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
     ],
-    keywords='django javascript model choices',
+    keywords='django javascript model field choices',
     packages=find_packages(),
+    package_data={
+        'django_js_choices': [
+            'templates/django_js_choices/*',
+        ]
+    },
     install_requires=[
         'Django>=1.5',
     ]
