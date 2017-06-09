@@ -3,10 +3,12 @@
     var namedChoices = {{ named_choices|safe }};
     return {
         pairs: function(name) {
-            return rawChoices[namedChoices[name]].map(pair => ({value: pair[0], label: pair[1]}));
+            var choices = rawChoices[namedChoices[name]];
+            return choices && choices.map(pair => ({value: pair[0], label: pair[1]}));
         },
         display: function(name, choice) {
-            var pair = rawChoices[namedChoices[name]].find(pair => pair[0] == choice);
+            var choices = rawChoices[namedChoices[name]],
+                pair = choices && choices.find(pair => pair[0] == choice);
             return pair && pair[1];
         }
     };
