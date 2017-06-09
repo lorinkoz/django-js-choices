@@ -8,7 +8,8 @@
         },
         display: function(name, choice) {
             var choices = rawChoices[namedChoices[name]],
-                pair = choices && choices.find(pair => pair[0] == choice);
+                finder = typeof choice == "string" ? (pair => pair[0] == choice) : (pair => pair[0] == choice[name]),
+                pair = choices && choices.find(finder);
             return pair && pair[1];
         }
     };
