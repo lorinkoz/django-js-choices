@@ -12,13 +12,13 @@ def read(*parts):
     with codecs.open(filename, encoding='utf-8') as fp:
         return fp.read()
 
-
 version_tuple = __import__('django_js_choices').VERSION
 version = '.'.join([str(v) for v in version_tuple])
+
 setup(
     name='django-js-choices',
     version=version,
-    description='Javascript model field\'s choices handling for Django.',
+    description='Javascript model field choices handling for Django.',
     long_description=read('README.rst'),
     url='https://github.com/lorinkoz/django-js-choices',
     download_url='http://pypi.python.org/pypi/django-js-choices/',
@@ -29,7 +29,6 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: Implementation :: PyPy',
         'Framework :: Django',
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
