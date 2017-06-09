@@ -28,34 +28,34 @@ def prepare_choices(choices):
 def generate_js(locale=None):
     raw_choices = []
     named_choices = {}
-    used_names = []
+    conflicting_names = set()
     if locale:
         activate(locale)
     for app_config in apps.get_app_configs():
         for model in app_config.get_models():
             for field in model._meta.get_fields():
                 choices = getattr(field, 'flatchoices', None)
-                if choices:
-                    full_name = '{}_{}'.format(
-                        model._meta.label_lower.replace('.', '_'),
-                        field.name
-                    )
-                    simple_name = '{}_{}'.format(model._meta.model_name.lower(), field.name)
-                    name = field.name
-                    value = json.dumps(prepare_choices(choices))
-                    try:
-                        index = raw_choices.index(value)
-                    except ValueError:
-                        index = len(raw_choices)
-                        raw_choices.append(value)
-                    finally:
-                        named_choices[full_name] = index
-                        if simple_name not in used_names:
-                            named_choices[simple_name] = index
-                            used_names.append(simple_name)
-                        if name not in used_names:
-                            named_choices[name] = index
-                            used_names.append(name)
+                if not choices:
+                    continue
+                short_name = field.name
+                medium_name = '{}_{}'.format(model._meta.model_name.lower(), field.name)
+                full_name = '{}_{}'.format(
+                    model._meta.label_lower.replace('.', '_'),
+                    field.name
+                )
+                value = json.dumps(prepare_choices(choices))
+                try:
+                    index = raw_choices.index(value)
+                except ValueError:
+                    index = len(raw_choices)
+                    raw_choices.append(value)
+                for name in [short_name, medium_name, full_name]:
+                    if name not in named_choices:
+                        named_choices[name] = index
+                    elif raw_choices[named_choices[name]] != value:
+                        conflicting_names.add(name)
+    for name in conflicting_names:
+        del named_choices[name]
     if locale:
         deactivate()
     js_var_name = getattr(settings, 'JS_CHOICES_JS_VAR_NAME', default_settings.JS_VAR_NAME)
