@@ -34,8 +34,10 @@ def generate_js(locale=None):
     for app_config in apps.get_app_configs():
         for model in app_config.get_models():
             for field in model._meta.get_fields():
-                choices = getattr(field, 'flatchoices', None)
-                if not choices:
+                try:
+                    choices = [x for x in getattr(field, 'flatchoices', [])]
+                    assert len(choices)
+                except:
                     continue
                 short_name = field.name
                 medium_name = '{}_{}'.format(model._meta.model_name.lower(), field.name)
