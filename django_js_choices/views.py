@@ -6,6 +6,6 @@ from django.http import HttpResponse
 
 
 def choices_js(request):
-    locale = request.GET.get('lang', None) or request.GET.get('locale', None)
+    locale = request.GET.get("lang", None) or request.GET.get("locale", None)
     response_body = generate_js(locale)
-    return HttpResponse(response_body, **{'content_type': 'application/javascript'})
+    return HttpResponse(response_body, **{"content_type": "application/javascript"})
