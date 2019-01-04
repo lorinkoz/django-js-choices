@@ -231,18 +231,4 @@ Credits
 -------
 
 Inspired by (and conceptually forked from)
-`django-js-reverse <https://github.com/ierror/django-js-reverse>`
-
-
-License
--------
-
-`MIT <https://raw.github.com/lorinkoz/django-js-choices/develop/LICENSE>`_
-
-
-Contact
--------
-
-lorinkoz@gmail.com
-
-`@lorinkoz <https://twitter.com/lorinkoz>`_
+`django-js-reverse <https://github.com/ierror/django-js-reverse>`_
