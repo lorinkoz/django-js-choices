@@ -41,9 +41,7 @@ def generate_js(locale=None):
                     continue
                 short_name = field.name
                 medium_name = "{}_{}".format(model._meta.model_name.lower(), field.name)
-                full_name = "{}_{}".format(
-                    model._meta.label_lower.replace(".", "_"), field.name
-                )
+                full_name = "{}_{}".format(model._meta.label_lower.replace(".", "_"), field.name)
                 value = json.dumps(prepare_choices(choices))
                 try:
                     index = raw_choices.index(value)
@@ -59,13 +57,9 @@ def generate_js(locale=None):
         del named_choices[name]
     if locale:
         deactivate()
-    js_var_name = getattr(
-        settings, "JS_CHOICES_JS_VAR_NAME", default_settings.JS_VAR_NAME
-    )
+    js_var_name = getattr(settings, "JS_CHOICES_JS_VAR_NAME", default_settings.JS_VAR_NAME)
     js_global_object_name = getattr(
-        settings,
-        "JS_CHOICES_JS_GLOBAL_OBJECT_NAME",
-        default_settings.JS_GLOBAL_OBJECT_NAME,
+        settings, "JS_CHOICES_JS_GLOBAL_OBJECT_NAME", default_settings.JS_GLOBAL_OBJECT_NAME
     )
     minfiy = getattr(settings, "JS_CHOICES_JS_MINIFY", default_settings.JS_MINIFY)
     js_content = loader.render_to_string(

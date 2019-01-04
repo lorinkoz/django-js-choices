@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "django-js-choices"
+version = "0.2.4"
+description = "Javascript model field choices handling for Django."
+license = "MIT"
+authors = ["Lorenzo Peña <lorinkoz@gmail.com>"]
+readme = "README.rst"
+repository = "https://github.com/lorinkoz/django-js-choices"
+keywords = ["django", "choices", "javascript"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Django",
+]
+
+[tool.poetry.dependencies]
+python = "~2.7 || ^3.5"
+django = "^1.5 || ^2.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[tool.black]
+line-length = 120
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

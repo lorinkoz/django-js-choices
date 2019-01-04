@@ -18,7 +18,5 @@ def js_choices_inline(context):
     locale = None
     if "request" in context:
         request = context["request"]
-        locale = locale = request.GET.get("lang", None) or request.GET.get(
-            "locale", None
-        )
+        locale = locale = request.GET.get("lang", None) or request.GET.get("locale", None)
     return mark_safe(generate_js(locale))

@@ -27,9 +27,7 @@ class Command(BaseCommand):
         )
 
     def get_location(self):
-        output_path = getattr(
-            settings, "JS_CHOICES_OUTPUT_PATH", default_settings.JS_OUTPUT_PATH
-        )
+        output_path = getattr(settings, "JS_CHOICES_OUTPUT_PATH", default_settings.JS_OUTPUT_PATH)
         if output_path:
             return output_path
         if not hasattr(settings, "STATIC_ROOT") or not settings.STATIC_ROOT:
