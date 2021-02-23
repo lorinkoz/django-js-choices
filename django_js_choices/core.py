@@ -32,7 +32,7 @@ def generate_choices(locale=None):
         for model in app_config.get_models():
             for field in model._meta.get_fields():
                 try:
-                    choices = [x for x in getattr(field, "flatchoices", [])]
+                    choices = list(getattr(field, "flatchoices", []))
                     assert len(choices)
                 except Exception:
                     continue

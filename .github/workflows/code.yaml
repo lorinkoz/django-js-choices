@@ -22,7 +22,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: dpgs_sandbox
+          POSTGRES_DB: djsc_sandbox
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -41,14 +41,14 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install poetry
+          python -m pip install --upgrade poetry
           python -m poetry install
       - name: Install Django specific version ${{ matrix.django-version }}
         run: |
           python -m poetry run pip install "Django${{ matrix.django-version }}"
       - name: Run Tests
         run: |
-          python -m poetry run coverage run dpgs_sandbox/manage.py test tests
+          python -m poetry run coverage run djsc_sandbox/manage.py test tests
       - name: Upload coverage to Coveralls
         if: matrix.python-version == '3.6' && matrix.django-version == '~=2.0.0'
         env:

@@ -50,6 +50,8 @@ coverage.xml
 # Translations
 *.mo
 *.pot
+# Must include sandbox translations for tests
+!djsc_sandbox/basic/locale/**
 
 # Django stuff:
 *.log
