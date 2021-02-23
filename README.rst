@@ -2,18 +2,35 @@ django-js-choices
 =================
 
 .. image:: https://img.shields.io/badge/packaging-poetry-purple.svg
-   :alt: Packaging: poetry
-   :target: https://github.com/sdispater/poetry
+    :alt: Packaging: poetry
+    :target: https://github.com/sdispater/poetry
 
 .. image:: https://img.shields.io/badge/code%20style-black-black.svg
-   :alt: Code style: black
-   :target: https://github.com/ambv/black
+    :alt: Code style: black
+    :target: https://github.com/ambv/black
+
+.. image:: https://github.com/lorinkoz/django-js-choices/workflows/code/badge.svg
+    :alt: Build status
+    :target: https://github.com/lorinkoz/django-js-choices/actions
+
+.. image:: https://coveralls.io/repos/github/lorinkoz/django-js-choices/badge.svg?branch=master
+    :alt: Code coverage
+    :target: https://coveralls.io/github/lorinkoz/django-js-choices?branch=master
+
+.. image:: https://badge.fury.io/py/django-js-choices.svg
+    :alt: PyPi version
+    :target: http://badge.fury.io/py/django-js-choices
+
+.. image:: https://pepy.tech/badge/django-js-choices/month
+    :alt: Downloads
+    :target: https://pepy.tech/project/django-js-choices
+
+|
 
 Overview
 --------
 
-Django JS Choices is a small Django app that makes handling of
-`model field choices`_ in javascript easy.
+Django JS Choices makes handling of `model field choices`_ in javascript easy.
 
 .. _model field choices: https://docs.djangoproject.com/en/dev/ref/models/fields.html#django.db.models.Field.choices
 
@@ -69,13 +86,6 @@ In both cases the result is
 .. code-block:: javascript
 
     "Freshman"
-
-
-Requirements
-------------
-
--  Python (2.7+, 3.5+)
--  Django (1.5+)
 
 
 Installation
@@ -221,10 +231,12 @@ to your project's `STATIC_ROOT`, but you can change the output path.
     JS_CHOICES_OUTPUT_PATH = 'some/other/path'
 
 
-Running the test suite
-----------------------
+Contributing
+------------
 
-NOT YET AVAILABLE
+- PRs are welcome!
+- To run the test suite run ``make`` or ``make coverage``. The tests for this
+  project live inside a small django project called ``djsc_sandbox``.
 
 
 Credits
