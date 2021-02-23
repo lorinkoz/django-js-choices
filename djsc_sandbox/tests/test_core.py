@@ -41,11 +41,11 @@ class GenerateChoicesTestCase(SimpleTestCase):
 
     def test_present_long_names_and_choice_count(self):
         raw_choices, named_choices = generate_choices()
-        self.assertEqual(len(raw_choices[named_choices["basic_modela_year_in_school"]]), 5)
-        self.assertEqual(len(raw_choices[named_choices["basic_modelb_year_in_school"]]), 4)
-        self.assertEqual(len(raw_choices[named_choices["basic_modelb_media"]]), 5)
-        self.assertEqual(len(raw_choices[named_choices["basic_modelc_medals"]]), 3)
-        self.assertEqual(len(raw_choices[named_choices["basic_modelc_media"]]), 5)
+        self.assertEqual(len(raw_choices[named_choices["myapp_modela_year_in_school"]]), 5)
+        self.assertEqual(len(raw_choices[named_choices["myapp_modelb_year_in_school"]]), 4)
+        self.assertEqual(len(raw_choices[named_choices["myapp_modelb_media"]]), 5)
+        self.assertEqual(len(raw_choices[named_choices["myapp_modelc_medals"]]), 3)
+        self.assertEqual(len(raw_choices[named_choices["myapp_modelc_media"]]), 5)
 
     def test_present_medium_names(self):
         raw_choices, named_choices = generate_choices()
@@ -65,7 +65,7 @@ class GenerateChoicesTestCase(SimpleTestCase):
     def test_locale_translation(self):
         raw_choices, named_choices = generate_choices("es")
         self.assertEqual(
-            [x[1] for x in raw_choices[named_choices["basic_modela_year_in_school"]]],
+            [x[1] for x in raw_choices[named_choices["myapp_modela_year_in_school"]]],
             [
                 "Estudiante de primer año",
                 "Estudiante de segundo año",
@@ -75,7 +75,7 @@ class GenerateChoicesTestCase(SimpleTestCase):
             ],
         )
         self.assertEqual(
-            [x[1] for x in raw_choices[named_choices["basic_modelb_year_in_school"]]],
+            [x[1] for x in raw_choices[named_choices["myapp_modelb_year_in_school"]]],
             [
                 "Estudiante de primer año",
                 "Estudiante de segundo año",
@@ -84,11 +84,11 @@ class GenerateChoicesTestCase(SimpleTestCase):
             ],
         )
         self.assertEqual(
-            [x[1] for x in raw_choices[named_choices["basic_modelb_media"]]],
+            [x[1] for x in raw_choices[named_choices["myapp_modelb_media"]]],
             ["Vinil", "CD", "Cinta VHS", "DVD", "Desconocido"],
         )
         self.assertEqual(
-            [x[1] for x in raw_choices[named_choices["basic_modelc_medals"]]],
+            [x[1] for x in raw_choices[named_choices["myapp_modelc_medals"]]],
             ["Oro", "Plata", "Bronce"],
         )
 
