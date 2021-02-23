@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-23 18:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: djsc_sandbox/basic/choices.py:4
+msgid "Freshman"
+msgstr "Estudiante de primer año"
+
+#: djsc_sandbox/basic/choices.py:5
+msgid "Sophomore"
+msgstr "Estudiante de segundo año"
+
+#: djsc_sandbox/basic/choices.py:6
+msgid "Junior"
+msgstr "Estudiante de tercer año"
+
+#: djsc_sandbox/basic/choices.py:7
+msgid "Senior"
+msgstr "Estudiante de último año"
+
+#: djsc_sandbox/basic/choices.py:8
+msgid "Graduate"
+msgstr "Graduado"
+
+#: djsc_sandbox/basic/choices.py:15
+msgid "Vinyl"
+msgstr "Vinil"
+
+#: djsc_sandbox/basic/choices.py:16
+msgid "CD"
+msgstr "CD"
+
+#: djsc_sandbox/basic/choices.py:22
+msgid "VHS Tape"
+msgstr "Cinta VHS"
+
+#: djsc_sandbox/basic/choices.py:23
+msgid "DVD"
+msgstr "DVD"
+
+#: djsc_sandbox/basic/choices.py:26
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: djsc_sandbox/basic/choices.py:30
+msgid "Gold"
+msgstr "Oro"
+
+#: djsc_sandbox/basic/choices.py:31
+msgid "Silver"
+msgstr "Plata"
+
+#: djsc_sandbox/basic/choices.py:32
+msgid "Bronze"
+msgstr "Bronce"
+
+#: djsc_sandbox/tests/test_core.py:16
+msgid "b"
+msgstr "b"
