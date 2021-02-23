@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import os
 import sys
 
@@ -23,7 +21,7 @@ class Command(BaseCommand):
             action="store",
             dest="locale",
             default=settings.LANGUAGE_CODE,
-            help="Pass custom locale to generate choices file",
+            help="Locale to generate choices file",
         )
 
     def get_location(self):

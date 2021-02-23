@@ -13,14 +13,32 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "~2.7 || ^3.5"
-django = "^1.5 || ^2.0"
+python = "^3.6.1"
+django = ">=2.0,<4.0"
+rjsmin = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
+black = "^20.8b1"
+coverage = {extras = ["toml"], version = "^5.1"}
+flake8 = "^3.8.4"
+flake8-bugbear = "^20.11.1"
+flake8-comprehensions = "^3.3.1"
+flake8-no-types = "^1.1.1"
+flake8-tidy-imports = "^4.2.1"
+isort = "^5.6.4"
+django-multiselectfield = "^0.1.12"
 
 [tool.black]
 line-length = 120
+
+[tool.isort]
+atomic = true
+combine_as_imports = true
+line_length = 120
+profile = "black"
+
+[tool.coverage.run]
+source = ["django_js_choices"]
 
 [build-system]
 requires = ["poetry>=0.12"]
