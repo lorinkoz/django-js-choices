@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-js-choices"
-version = "1.0.0"
+version = "0.3.0"
 description = "Javascript model field choices handling for Django."
 license = "MIT"
 authors = ["Lorenzo Peña <lorinkoz@gmail.com>"]
@@ -8,7 +8,7 @@ readme = "README.rst"
 repository = "https://github.com/lorinkoz/django-js-choices"
 keywords = ["django", "choices", "javascript"]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 4 - Beta",
     "Framework :: Django",
     "Framework :: Django :: 2.0",
     "Framework :: Django :: 2.1",
