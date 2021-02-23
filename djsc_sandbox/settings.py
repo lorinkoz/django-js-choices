@@ -69,9 +69,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "djsc_sandbox.wsgi.application"
-
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
