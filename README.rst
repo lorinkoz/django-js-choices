@@ -125,20 +125,20 @@ First generate static file by
 If you add apps, models, or change some existing choices,
 you may update the choices.js file by running the command again.
 
-The choices files is always created with a locale prefix: ``choices-en-us.js``
+The choices files is created with the locale prefix defined in your settings,
 but you can pass any locale to the command...
 
 .. code-block:: bash
 
     python manage.py collectstatic_js_choices --locale es
 
-...and the generated file will be ``choices-es.js``
+In this case, the generated file will be ``choices-es.js``.
 
 After this add the file to your template.
 
 .. code-block:: html
 
-    <script src="{% static 'django_js_choices/js/choices-es.js' %}"></script>
+    <script src="{% static 'choices-es.js' %}"></script>
 
 
 Usage with views
@@ -149,8 +149,9 @@ Include non-cached view...
 .. code-block:: python
 
     from django_js_choices.views import choices_js
+
     urlpatterns = [
-        url(r'^jschoices/$', choices_js, name='js_choices'),
+        path("jschoices/", choices_js, name="js_choices"),
     ]
 
 ...or use cache to save some bandwith.
@@ -160,7 +161,7 @@ Include non-cached view...
     from django_js_choices.views import choices_js
 
     urlpatterns = [
-        url(r'^jschoices/$', cache_page(3600)(choices_js), name='js_choices'),
+        path("jschoices/", cache_page(3600)(choices_js), name="js_choices"),
     ]
 
 Include javascript in your template.
@@ -222,13 +223,6 @@ by Django setting.
 .. code-block:: python
 
     JS_CHOICES_JS_MINIFY = False
-
-By default collectstatic_js_choices writes its output (`choices-en-us.js`)
-to your project's `STATIC_ROOT`, but you can change the output path.
-
-.. code-block:: python
-
-    JS_CHOICES_OUTPUT_PATH = 'some/other/path'
 
 
 Contributing
