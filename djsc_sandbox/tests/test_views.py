@@ -1,5 +1,7 @@
 from django.test.testcases import TestCase
 
+from django_js_choices.core import generate_js
+
 
 class ChoicesJSTestCase(TestCase):
     """
@@ -29,3 +31,14 @@ class ChoicesJSTestCase(TestCase):
         self.assertContains(response, "Vinil")
         self.assertContains(response, "Desconocido")
         self.assertContains(response, "Oro")
+
+
+class InlineChoicesTestCase(TestCase):
+    """
+    Test inline_choices view.
+    """
+
+    def test_view(self):
+        json_content = generate_js()
+        response = self.client.get("/inline/")
+        self.assertContains(response, json_content)
