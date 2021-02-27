@@ -64,7 +64,7 @@ def generate_js(locale=None):
     js_global_object_name = getattr(
         settings, "JS_CHOICES_JS_GLOBAL_OBJECT_NAME", default_settings.JS_GLOBAL_OBJECT_NAME
     )
-    minfiy = getattr(settings, "JS_CHOICES_JS_MINIFY", default_settings.JS_MINIFY)
+    minify = getattr(settings, "JS_CHOICES_JS_MINIFY", default_settings.JS_MINIFY)
 
     js_content = loader.render_to_string(
         "django_js_choices/choices_js.tpl",
@@ -76,7 +76,7 @@ def generate_js(locale=None):
         },
     )
 
-    if minfiy:
+    if minify:
         try:
             from rjsmin import jsmin
 
