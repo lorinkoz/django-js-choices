@@ -4,12 +4,20 @@
     return {
         pairs: function(name) {
             var choices = rawChoices[namedChoices[name]];
-            return choices && choices.map(pair => ({value: pair[0], label: pair[1]}));
+            var mapper = function (pair) {
+                return {
+                    value: pair[0],
+                    label: pair[1]
+                };
+            }
+            return choices && choices.map(mapper);
         },
         display: function(name, choice) {
-            var choices = rawChoices[namedChoices[name]],
-                finder = choice !== Object(choice) ? (pair => pair[0] == choice) : (pair => pair[0] == choice[name]),
-                pair = choices && choices.find(finder);
+            var choices = rawChoices[namedChoices[name]];
+            var finder = choice !== Object(choice)
+                ? function (pair) { return pair[0] == choice; }
+                : function (pair) { return pair[0] == choice[name]; };
+            var pair = choices && choices.filter(finder)[0];
             return pair && pair[1];
         }
     };
