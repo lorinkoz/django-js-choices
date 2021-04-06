@@ -10,16 +10,14 @@ keywords = ["django", "choices", "javascript"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Framework :: Django",
-    "Framework :: Django :: 2.0",
-    "Framework :: Django :: 2.1",
     "Framework :: Django :: 2.2",
-    "Framework :: Django :: 3.0",
     "Framework :: Django :: 3.1",
+    "Framework :: Django :: 3.2",
 ]
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
-django = ">=2.0,<4.0"
+django = ">=2.2,<=3.2,!=3.0"
 rjsmin = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
