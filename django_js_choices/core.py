@@ -22,12 +22,45 @@ def prepare_choices(choices):
     return new_choices
 
 
+class ExternalChoices:
+    def __init__(self):
+        self.choices = []
+
+    def __iter__(self):
+        return iter(self.choices)
+
+
+external_choices = ExternalChoices()
+
+
+def register_choice(name, choices):
+    external_choices.choices.append((name, choices))
+
+
 def generate_choices(locale=None):
     raw_choices = []
     named_choices = {}
     conflicting_names = set()
+
     if locale:
         activate(locale)
+
+    def handle_save_choice(choices_names, choices):
+        value = prepare_choices(choices)
+        try:
+            index = raw_choices.index(value)
+        except ValueError:
+            index = len(raw_choices)
+            raw_choices.append(value)
+        for name in choices_names:
+            if name not in named_choices:
+                named_choices[name] = index
+            elif raw_choices[named_choices[name]] != value:
+                conflicting_names.add(name)
+
+    for choice_name, choices in external_choices:
+        handle_save_choice([choice_name], choices)
+
     for app_config in apps.get_app_configs():
         for model in app_config.get_models():
             for field in model._meta.get_fields():
@@ -39,17 +72,7 @@ def generate_choices(locale=None):
                 short_name = field.name
                 medium_name = "{}_{}".format(model._meta.model_name.lower(), field.name)
                 full_name = "{}_{}".format(model._meta.label_lower.replace(".", "_"), field.name)
-                value = prepare_choices(choices)
-                try:
-                    index = raw_choices.index(value)
-                except ValueError:
-                    index = len(raw_choices)
-                    raw_choices.append(value)
-                for name in [short_name, medium_name, full_name]:
-                    if name not in named_choices:
-                        named_choices[name] = index
-                    elif raw_choices[named_choices[name]] != value:
-                        conflicting_names.add(name)
+                handle_save_choice([short_name, medium_name, full_name], choices)
     for name in conflicting_names:
         del named_choices[name]
     if locale:
