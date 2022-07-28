@@ -45,21 +45,14 @@ def generate_choices(locale=None):
     if locale:
         activate(locale)
 
-    def handle_save_choice(choices_names, choices):
-        value = prepare_choices(choices)
+    def save_choices(value):
+        """Saves the value if it's not in the list and returns it's index"""
         try:
-            index = raw_choices.index(value)
+            return raw_choices.index(value)
         except ValueError:
             index = len(raw_choices)
             raw_choices.append(value)
-        for name in choices_names:
-            if name not in named_choices:
-                named_choices[name] = index
-            elif raw_choices[named_choices[name]] != value:
-                conflicting_names.add(name)
-
-    for choice_name, choices in external_choices:
-        handle_save_choice([choice_name], choices)
+            return index
 
     for app_config in apps.get_app_configs():
         for model in app_config.get_models():
@@ -72,9 +65,22 @@ def generate_choices(locale=None):
                 short_name = field.name
                 medium_name = "{}_{}".format(model._meta.model_name.lower(), field.name)
                 full_name = "{}_{}".format(model._meta.label_lower.replace(".", "_"), field.name)
-                handle_save_choice([short_name, medium_name, full_name], choices)
+                value = prepare_choices(choices)
+                index = save_choices(value)
+                for name in [short_name, medium_name, full_name]:
+                    if name not in named_choices:
+                        named_choices[name] = index
+                    elif raw_choices[named_choices[name]] != value:
+                        conflicting_names.add(name)
+
     for name in conflicting_names:
         del named_choices[name]
+
+    for choice_name, choices in external_choices:
+        value = prepare_choices(choices)
+        index = save_choices(value)
+        named_choices[choice_name] = index
+
     if locale:
         deactivate()
     return raw_choices, named_choices
