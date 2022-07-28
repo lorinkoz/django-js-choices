@@ -34,7 +34,9 @@ external_choices = ExternalChoices()
 
 
 def register_choice(name, choices):
-    external_choices.choices.append((name, choices))
+    choices_names = [choice[0] for choice in external_choices]
+    if name not in choices_names:
+        external_choices.choices.append((name, choices))
 
 
 def generate_choices(locale=None):
