@@ -5,8 +5,8 @@ from django.test.testcases import SimpleTestCase
 from django.utils.translation import gettext_lazy as _, override
 from dukpy import evaljs
 
-from django_js_choices.core import generate_choices, generate_js, prepare_choices
-from djsc_sandbox.myapp.choices import MEDAL_TYPES, MEDIA_CHOICES, YEAR_IN_SCHOOL_CHOICES
+from django_js_choices.core import external_choices, generate_choices, generate_js, prepare_choices, register_choice
+from djsc_sandbox.myapp.choices import FRUITS_CUSTOM_CHOICES, MEDAL_TYPES, MEDIA_CHOICES, YEAR_IN_SCHOOL_CHOICES
 
 
 class PrepareChoicesTestCase(SimpleTestCase):
@@ -63,6 +63,16 @@ class GenerateChoicesTestCase(SimpleTestCase):
         self.assertIn("medals", named_choices)
         self.assertIn("media", named_choices)  # Not excluded because it's the same on all models
         self.assertNotIn("year_in_school", named_choices)  # Excluded due to conflict between models
+
+    def test_external_choices(self):
+        new_medals_choices = [(1, "1"), (2, "2")]
+        register_choice("medals", new_medals_choices)
+        raw_choices, named_choices = generate_choices()
+        self.assertIn("fruits", named_choices)
+        # "medals" has a name clash, but it should be present because manually registered names should not change
+        self.assertIn("medals", named_choices)
+        medals_index = named_choices["medals"]
+        self.assertEqual(raw_choices[medals_index], new_medals_choices)
 
     def test_locale_translation(self):
         raw_choices, named_choices = generate_choices("es")
