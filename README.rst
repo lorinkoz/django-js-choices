@@ -200,6 +200,38 @@ If any of these names conflict with other model fields,
 the conflicting names won't be accessible to prevent ambiguity.
 
 
+Register other choices not in models
+------------------------------------
+
+If you have some choices you want to expose to javascript, and they don't fit into any
+model, lets say for example, a list of actions, you can add those too:
+
+.. code-block:: python
+
+    from django_js_choices.core import register_choice
+
+    POSSIBLE_ACTIONS = (
+        ("go_down", "Go down"),
+        ("go_top", "Go top"),
+        ("nothing", "Stay")
+    )
+    ...
+    # register_choice(name: string, choices: list)
+    register_choice("possible_actions", POSSIBLE_ACTIONS)
+
+- If any of the names of a manually registered choice conflicts with some model fields, the one you manually
+  registered will be the one you'll access.
+- The 2nd argument is the same type that you'd pass to a CharField `choices` argument.
+
+You can only access the ``POSSIBLE_ACTIONS`` choices through the name ``possible_actions``
+
+PLEASE NOTE: You must ensure the file where you are registering your choice is been processed by django
+
+.. code-block:: javascript
+
+    Choices.pairs("possible_actions")
+
+
 Options
 -------
 
