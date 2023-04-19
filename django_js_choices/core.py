@@ -3,7 +3,7 @@ import json
 from django.apps import apps
 from django.conf import settings
 from django.template import loader
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import activate, deactivate
 
 from . import js_choices_settings as default_settings
@@ -16,9 +16,9 @@ def prepare_choices(choices):
             continue
         try:
             json.dumps(choice[0])
-            new_choices.append((choice[0], force_text(choice[1])))
+            new_choices.append((choice[0], force_str(choice[1])))
         except TypeError:
-            new_choices.append((force_text(choice[0]), force_text(choice[1])))
+            new_choices.append((force_str(choice[0]), force_str(choice[1])))
     return new_choices
 
 
