@@ -22,7 +22,7 @@ rjsmin = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.3.0"
-coverage = {extras = ["toml"], version = "^5.1"}
+coverage = {extras = ["toml"], version = "^6.3"}
 django-multiselectfield = "^0.1.12"
 dukpy = "^0.2.3"
 flake8 = "^3.8.4"
