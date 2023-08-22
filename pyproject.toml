@@ -17,7 +17,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
-django = ">=4.0,<=4.2"
+django = ">=4.0,<=4.3"
 rjsmin = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
