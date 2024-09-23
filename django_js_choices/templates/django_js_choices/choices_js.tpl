@@ -9,7 +9,7 @@
                     value: pair[0],
                     label: pair[1]
                 };
-            }
+            };
             return choices && choices.map(mapper);
         },
         display: function(name, choice) {

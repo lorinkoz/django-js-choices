@@ -10,21 +10,20 @@ keywords = ["django", "choices", "javascript"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Framework :: Django",
-    "Framework :: Django :: 4.0",
-    "Framework :: Django :: 4.1",
-    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8.1"
-django = ">=4.0,<5.0"
+python = "^3.10"
+django = ">=5.0,<6.0"
 rjsmin = "^1.1.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 coverage = {extras = ["toml"], version = "^6.3"}
 django-multiselectfield = "^0.1.12"
-dukpy = "^0.3.0"
+dukpy = "^0.4.0"
 flake8 = "^6.0.0"
 flake8-bugbear = "^23.3.23"
 flake8-comprehensions = "^3.12.0"
