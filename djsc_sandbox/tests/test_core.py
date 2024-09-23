@@ -111,10 +111,13 @@ class GenerateJSTestCase(SimpleTestCase):
     """
 
     def get_display(self, json_content, field, key):
-        return evaljs(f"{json_content} Choices.display('{field}', '{key}')")
+        # new dukpy version will return undefined as an empty python dict
+        return evaljs(
+            f"{json_content}; result = Choices.display('{field}', '{key}'); result === undefined ? null : result"
+        )
 
     def get_pairs(self, json_content, field):
-        return evaljs(f"{json_content} Choices.pairs('{field}')")
+        return evaljs(f"{json_content}; result = Choices.pairs('{field}'); result === undefined ? null : result")
 
     @override_settings(JS_CHOICES_JS_MINIFY=True)
     def test_display_with_jsmin(self):
@@ -131,9 +134,9 @@ class GenerateJSTestCase(SimpleTestCase):
         self.assertEqual(self.get_display(json_content, "modelb_media", "vhs"), "VHS Tape")
         self.assertEqual(self.get_display(json_content, "modelb_media", "dvd"), "DVD")
         self.assertEqual(self.get_display(json_content, "modelb_media", "unknown"), "Unknown")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "GOLD"), "Gold")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "SILVER"), "Silver")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "BRONZE"), "Bronze")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Gold"), "Gold")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Silver"), "Silver")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Bronze"), "Bronze")
 
     @override_settings(JS_CHOICES_JS_MINIFY=False)
     def test_display_without_jsmin(self):
@@ -150,9 +153,9 @@ class GenerateJSTestCase(SimpleTestCase):
         self.assertEqual(self.get_display(json_content, "modelb_media", "vhs"), "VHS Tape")
         self.assertEqual(self.get_display(json_content, "modelb_media", "dvd"), "DVD")
         self.assertEqual(self.get_display(json_content, "modelb_media", "unknown"), "Unknown")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "GOLD"), "Gold")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "SILVER"), "Silver")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "BRONZE"), "Bronze")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Gold"), "Gold")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Silver"), "Silver")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Bronze"), "Bronze")
 
     def test_display_with_locale(self):
         json_content = generate_js("es")
@@ -168,9 +171,9 @@ class GenerateJSTestCase(SimpleTestCase):
         self.assertEqual(self.get_display(json_content, "modelb_media", "vhs"), "Cinta VHS")
         self.assertEqual(self.get_display(json_content, "modelb_media", "dvd"), "DVD")
         self.assertEqual(self.get_display(json_content, "modelb_media", "unknown"), "Desconocido")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "GOLD"), "Oro")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "SILVER"), "Plata")
-        self.assertEqual(self.get_display(json_content, "modelc_medals", "BRONZE"), "Bronce")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Gold"), "Oro")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Silver"), "Plata")
+        self.assertEqual(self.get_display(json_content, "modelc_medals", "Bronze"), "Bronce")
 
     @override_settings(JS_CHOICES_JS_MINIFY=True)
     def test_pairs_with_jsmin(self):
@@ -216,3 +219,31 @@ class GenerateJSTestCase(SimpleTestCase):
         self.assertEqual(self.get_pairs(json_content, "modelb_year_in_school"), years_in_school[:-1])
         self.assertEqual(self.get_pairs(json_content, "modelb_media"), media_choices)
         self.assertEqual(self.get_pairs(json_content, "modelc_medals"), medal_types)
+
+    def test_same_values_for_different_choices_type(self):
+        json_content = generate_js()
+
+        year_in_school_a1 = self.get_pairs(json_content, "modela_year_in_school")
+        year_in_school_a2 = self.get_pairs(json_content, "modela_year_in_school_2")
+        self.assertTrue(year_in_school_a1)
+        self.assertEqual(year_in_school_a1, year_in_school_a2)
+
+        media_b1 = self.get_pairs(json_content, "modelb_media")
+        media_b2 = self.get_pairs(json_content, "modelb_media_2")
+        self.assertTrue(media_b1)
+        self.assertEqual(media_b1, media_b2)
+
+        medal_c1 = self.get_pairs(json_content, "modelc_medals")
+        medal_c2 = self.get_pairs(json_content, "modelc_medals_2")
+        self.assertTrue(medal_c1)
+        self.assertEqual(medal_c1, medal_c2)
+
+        medal_d1 = self.get_pairs(json_content, "modeld_medals")
+        medal_d2 = self.get_pairs(json_content, "modeld_medals_2")
+        self.assertTrue(medal_d1)
+        self.assertEqual(medal_d1, medal_d2)
+
+        yes_no_d1 = self.get_pairs(json_content, "modeld_yes_no")
+        yes_no_d2 = self.get_pairs(json_content, "modeld_yes_no_2")
+        self.assertTrue(yes_no_d1)
+        self.assertEqual(yes_no_d1, yes_no_d2)
