@@ -262,7 +262,7 @@ Contributing
 
 - PRs are welcome!
 - To run the test suite run ``make`` or ``make coverage``. The tests for this
-  project live inside a small django project called ``djsc_sandbox``.
+  project live inside a small django project called ``sandbox``.
 
 
 Credits
