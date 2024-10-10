@@ -17,58 +17,58 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: djsc_sandbox/myapp/choices.py:4
+#: sandbox/myapp/choices.py:4
 msgid "Freshman"
 msgstr "Estudiante de primer año"
 
-#: djsc_sandbox/myapp/choices.py:5
+#: sandbox/myapp/choices.py:5
 msgid "Sophomore"
 msgstr "Estudiante de segundo año"
 
-#: djsc_sandbox/myapp/choices.py:6
+#: sandbox/myapp/choices.py:6
 msgid "Junior"
 msgstr "Estudiante de tercer año"
 
-#: djsc_sandbox/myapp/choices.py:7
+#: sandbox/myapp/choices.py:7
 msgid "Senior"
 msgstr "Estudiante de último año"
 
-#: djsc_sandbox/myapp/choices.py:8
+#: sandbox/myapp/choices.py:8
 msgid "Graduate"
 msgstr "Graduado"
 
-#: djsc_sandbox/myapp/choices.py:15
+#: sandbox/myapp/choices.py:15
 msgid "Vinyl"
 msgstr "Vinil"
 
-#: djsc_sandbox/myapp/choices.py:16
+#: sandbox/myapp/choices.py:16
 msgid "CD"
 msgstr "CD"
 
-#: djsc_sandbox/myapp/choices.py:22
+#: sandbox/myapp/choices.py:22
 msgid "VHS Tape"
 msgstr "Cinta VHS"
 
-#: djsc_sandbox/myapp/choices.py:23
+#: sandbox/myapp/choices.py:23
 msgid "DVD"
 msgstr "DVD"
 
-#: djsc_sandbox/myapp/choices.py:26
+#: sandbox/myapp/choices.py:26
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: djsc_sandbox/myapp/choices.py:30
+#: sandbox/myapp/choices.py:30
 msgid "Gold"
 msgstr "Oro"
 
-#: djsc_sandbox/myapp/choices.py:31
+#: sandbox/myapp/choices.py:31
 msgid "Silver"
 msgstr "Plata"
 
-#: djsc_sandbox/myapp/choices.py:32
+#: sandbox/myapp/choices.py:32
 msgid "Bronze"
 msgstr "Bronce"
 
-#: djsc_sandbox/tests/test_core.py:16
+#: sandbox/tests/test_core.py:16
 msgid "b"
 msgstr "b"

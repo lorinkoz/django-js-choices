@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _, override
 from dukpy import evaljs
 
 from django_js_choices.core import generate_choices, generate_js, prepare_choices, register_choice
-from djsc_sandbox.myapp.choices import MEDAL_TYPES, MEDIA_CHOICES, YEAR_IN_SCHOOL_CHOICES
+from sandbox.myapp.choices import MEDAL_TYPES, MEDIA_CHOICES, YEAR_IN_SCHOOL_CHOICES
 
 
 class PrepareChoicesTestCase(SimpleTestCase):
